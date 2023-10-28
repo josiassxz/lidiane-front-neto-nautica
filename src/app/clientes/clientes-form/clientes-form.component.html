@@ -35,7 +35,12 @@
       <div class="col-md-3">
         <div class="form-group">
           <label>Nome Cliente: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.nome" name="nome"/>
+          <!-- <input type="text" class="form-control" [(ngModel)]="cliente.nome" name="nome"/> -->
+          <input type="text" class="form-control"  [(ngModel)]="cliente.nome" name="nome" (input)="buscarPorNome($event.target.value)" placeholder="Digite o nome do cliente">
+          <ul>
+            <li *ngFor="let cliente of clientes">{{cliente.nome}}</li>
+          </ul>
+
         </div>
       </div>
       <div class="col-md-2">

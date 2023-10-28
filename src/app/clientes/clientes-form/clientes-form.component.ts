@@ -29,6 +29,7 @@ export class ClientesFormComponent implements OnInit {
   cidades: Cidade[] = [];
   tipoPprocesso: TipoProcesso[] = [];
   origens: Origem[] = [];
+  clienteNome: Cliente[]= [];
   
 
 
@@ -81,7 +82,10 @@ export class ClientesFormComponent implements OnInit {
     this.router.navigate(['/clientes-lista']);
   }
 
-  mostrarCampoOutroTipoProcesso: boolean = false;
+  buscarPorNome(nome: string): void {
+    this.service.buscarPorNome(nome)
+      .subscribe(data => this.clienteNome = data);
+  }
 
 
 
