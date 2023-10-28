@@ -53,7 +53,7 @@
           <label>Cidade: *</label>
           <select class="form-control" [(ngModel)]="cliente.cidade" [ngModelOptions]="{ standalone: true}">
             <option value="">Selecione uma cidade</option>
-            <option *ngFor="let cidade of cidades" [value]="cidade.nome">{{ cidade.cidade }}</option>
+            <option *ngFor="let cidade of cidades" [value]="cidade.cidade">{{ cidade.cidade }}</option>
           </select>
         </div>
       </div>
