@@ -1,0 +1,100 @@
+.selectpicker{
+  border-radius: 5px;
+  background-color: white;
+  font-size: 20px;
+}
+.selectpicker-option{
+  background-color: DodgerBlue;
+}
+
+
+select-option{
+  background-color: #0b2e13;
+}
+
+h1 {
+  color: darkblue;
+  font-weight: bold;
+  font-family: "Arial", Times, serif;
+}
+
+label{
+  font-weight: bold;
+  font-size: 32px;
+  font-family: "Arial", Times, serif;
+}
+
+h2{
+  color: red;
+  font-family: "Arial", Times, serif;
+}
+
+#descricao{
+  color: darkblue;
+  font-size: 28px;
+  text-decoration: underline;
+  font-family: "Arial", Times, serif;
+}
+
+#valorRecebido{
+  margin-left: 900px;
+  font-size: 28px;
+  font-family: "Arial", Times, serif;
+}
+
+#corAzul1{
+  color: darkblue;
+  font-family: "Arial", Times, serif;
+}
+
+#corPreta1{
+  color: black;
+  font-family: "Arial", Times, serif;
+}
+
+#corAzul{
+  color: darkblue;
+  font-family: "Arial", Times, serif;
+}
+
+#corPreta{
+  color: black;
+  font-family: "Arial", Times, serif;
+}
+
+#corAzul2{
+  color: darkblue;
+  font-family: "Arial", Times, serif;
+}
+
+#corPreta2{
+  color: black;
+  font-family: "Arial", Times, serif;
+}
+
+#pago{
+  color: darkblue;
+  font-size: 46px;
+  margin-left: 900px;
+  text-decoration: underline;
+  font-family: "Arial", Times, serif;
+}
+
+#nomeCliente{
+  font-size: 32px;
+  font-family: "Arial", Times, serif;
+}
+
+#recibo{
+  font-size: 52px;
+  font-family: "Arial", Times, serif;
+}
+
+#impressao{
+  opacity: 0.0;
+}
+
+#contato{
+  color:red;
+}
+

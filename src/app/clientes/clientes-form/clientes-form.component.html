@@ -1,0 +1,206 @@
+<h1 class="mt-4">Clientes</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item active">{{ cliente.id ? 'Edição' : 'Cadastro'}}</li>
+</ol>
+<div class="container">
+  <form #clienteForm="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-success" role="alert" *ngIf="success == true">
+          Cliente salvo/atualizado com sucesso!
+        </div>
+
+        <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+          {{erro}}
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="cliente.id">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>ID:</label>
+          <input type="text" class="form-control" [ngModel]="cliente.id" name="id" disabled="true"/>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Semana: *</label>
+          <input type="date" class="form-control" [ngModel]="cliente.semana| date:'yyyy-MM-dd': '+1' : 'pt'" (ngModelChange)="cliente.semana=$event" name="data-semana"/>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Nome Cliente: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.nome" name="nome"/>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Captania: *</label>
+          <select class="form-control" [(ngModel)]="cliente.captania" [ngModelOptions]="{standalone: true}">
+            <option>CFB</option>
+            <option>CFGO</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Cidade: *</label>
+          <select class="form-control" [(ngModel)]="cliente.cidade" [ngModelOptions]="{ standalone: true}">
+            <option value="">Selecione uma cidade</option>
+            <option *ngFor="let cidade of cidades" [value]="cidade.nome">{{ cidade.cidade }}</option>
+          </select>
+        </div>
+      </div>
+      
+
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Tipo Processo: *</label>
+          <select class="form-control" [(ngModel)]="cliente.tipoProcesso" [ngModelOptions]="{ standalone: true}">
+            <option value="">Selecione um Tipo de Processo</option>
+            <option *ngFor="let tipo of tipoPprocesso" [value]="tipo.tipoProcesso">{{ tipo.tipoProcesso }}</option>
+          </select>
+        </div>
+      </div>
+      
+      
+      
+
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>N. Embarc: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.numEmbarc" name="nomeEmbarcacao"/>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Origem: *</label>
+          <select class="form-control" [(ngModel)]="cliente.origem" [ngModelOptions]="{ standalone: true}">
+            <option value="">Selecione um Tipo de Processo</option>
+            <option *ngFor="let origem of origens" [value]="origem.origem">{{ origem.origem }}</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Form. Pagament: *</label>
+          <select class="form-control" [(ngModel)]="cliente.formPgto" [ngModelOptions]="{standalone: true}">
+            <option>F.PGTO</option>
+            <option>DEPOSITO</option>
+            <option>DINHEIRO</option>
+            <option>C.DEBITO</option>
+            <option>CHQ A VISTA</option>
+            <option>CHQ PARCELADO</option>
+            <option>DINH + CHQ</option>
+            <option>DINH + CHQS</option>
+            <option>BOLETO A VISTA</option>
+            <option>PERMUTA</option>
+            <option>CREDITO PARCEIRO</option>
+            <option>BOLETO PARC</option>
+            <option>X</option>
+            <option>PIX</option>
+            <option>BOLETO</option>
+            <option>CORTERSIA</option>
+            <option>DINHEIRO/PIX</option>
+	    <option>CARTAO CREDITO</option>
+            <option>OUTROS</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Banco: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.banco" name="banco"/>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Data Recebimento: *</label>
+           <input  type="date" class="form-control" [ngModel]="cliente.dataReceb | date:'yyyy-MM-dd' : '+1' : 'pt'" (ngModelChange)="cliente.dataReceb=$event"  name="dataRecebimento"/>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Cx Recebido: *</label>
+
+          <input type="date"  class="form-control"[ngModel]="cliente.caixaRecebido| date:'yyyy-MM-dd' : '+1' : 'pt'" (ngModelChange)="cliente.caixaRecebido=$event" name="caixaRecebido"/>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Valor Serviço: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.valorServico" name="valorServico"/>
+          </div>
+        </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Valor Recebido: *</label>
+          <input type="text" value="" class="form-control" [(ngModel)]="cliente.recebibo" name="valorRecebido"/>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Valor á Receber: *</label>
+          <input type="text" value="{{valorReceber()| currency : 'R$'}}" class="form-control" name="valorAReceber" disabled/>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Situação Pagamento: *</label>
+          <input type="text" value="" class="form-control" [(ngModel)]="cliente.situacaoPagamento" name="situacaoPagamento"/>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>GRU: *</label>
+          <input type="text" value="" class="form-control" [(ngModel)]="cliente.gru" [ngModelOptions]="{standalone: true}"/>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Valor Liquido: *</label>
+          <input type="text" value= "{{ valorLiquido() | currency : 'R$'}}" class="form-control" name="valorLiquido"  disabled/>
+        </div>
+        <div>
+          <label>Observação: </label>
+          <input type="text" value="" class="form-control" [(ngModel)]="cliente.observacao" [ngModelOptions]="{standalone: true}" style="width: 700%; height: 50px"/>
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+
+    <div class="row" style="margin-top: 30px">
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-success" *ngIf="!cliente.id">
+          <i class="fa fa-save"></i> Salvar
+        </button>
+
+        <button type="submit" class="btn btn-primary" *ngIf="cliente.id">
+          <i class="fa fa-sync-alt"></i> Atualizar
+        </button>
+
+        <button type="button" class="btn btn-danger ml-1" (click)="voltarParaListagem()">
+          <i class="fa fa-arrow-alt-circle-left"></i> Voltar
+        </button>
+      </div>
+
+    </div>
+
+
+  </form>
+</div>

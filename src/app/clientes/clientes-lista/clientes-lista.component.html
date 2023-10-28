@@ -1,0 +1,255 @@
+<h1 class="mt-4 doNotPrint" >Clientes</h1>
+<ol class="breadcrumb mb-4 doNotPrint">
+
+</ol>
+<div class="container1">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+                {{ mensagemSucesso }}
+            </div>
+
+            <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+                {{ mensagemErro  }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row doNotPrint">
+      <div class="col-md-3">
+          <button class="btn btn-warning" (click)="novoCadastro()" >
+              <i class="fa fa-plus"></i> Novo Cliente
+          </button>
+      </div>
+      <div class="col-md-3">
+          <button class="btn btn-success" (click)="novaCidade()" >
+              <i class="fa fa-plus"></i> Nova Cidade
+          </button>
+      </div>
+      <div class="col-md-3">
+          <button class="btn btn-info" (click)="novaOrigem()" >
+              <i class="fa fa-plus"></i> Nova Origem
+          </button>
+      </div>
+      <div class="col-md-3">
+        <button class="btn btn-custom" (click)="novoTipoProcesso()" >
+            <i class="fa fa-plus"></i> Novo Tipo Processo
+        </button>
+    </div>
+  </div>
+  
+  
+  
+  <br>
+
+
+  <div class="flex-container">
+    <div class="col-md-4">
+      <label>Nome Cliente:</label>
+      <input type="text" class="form-control"  [(ngModel)]="filtroCliente.nome"/>
+    </div>
+       <div class="col-md-2">
+         <div class="form-group">
+           <label>Origem:</label>
+           <select class="form-control" [(ngModel)]="filtroCliente.origem" [ngModelOptions]="{standalone: true}">
+             <option>AGM</option>
+             <option>APN</option>
+             <option>B.FISHER</option>
+             <option>B.PARANA</option>
+             <option>C.PRESIDENTE</option>
+             <option>C.RONDON</option>
+             <option>C.PESCADOR</option>
+             <option>DANILO</option>
+             <option>DIAS NAUTICA</option>
+             <option>ENILDON</option>
+             <option>JOAO CATALÃO</option>
+             <option>MAIS VEICULOS</option>
+             <option>MARCA NAUTICA</option>
+             <option>MARINA DOS AMIGOS</option>
+             <option>ORCA</option>
+             <option>ORIGEM</option>
+             <option>PART.</option>
+             <option>PIER BOATS</option>
+             <option>PIER NAUTICA</option>
+             <option>RADIAL AUTOMOVEIS</option>
+             <option>SAGA APS</option>
+             <option>SAIMONT</option>
+             <option>SÓ PESCA</option>
+             <option>STATUS NAUTICA</option>
+             <option>TSA</option>
+             <option>VNB</option>
+             <option>VNG</option>
+             <option>X</option>
+           </select>
+         </div>
+       </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Data Recebimento Inicial:</label>
+        <input type="date"  class="form-control" name="DtRecebimentoIni" [(ngModel)]="filtroCliente.dtRecebimentoIni"
+        />
+      </div>
+    </div>
+       <div class="col-md-2">
+         <div class="form-group">
+           <label>Data Recebimento Final:</label>
+           <input type="date"  class="form-control" name="DtRecebimentoFinal"  [(ngModel)]="filtroCliente.dtRecebimentoFin" />
+         </div>
+       </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Data Recebimento:</label>
+        <input type="date"  class="form-control" name="DtRecebimento"  [(ngModel)]="filtroCliente.dtRecebimento" />
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Captania:</label>
+        <select class="form-control" [(ngModel)]="filtroCliente.captania" [ngModelOptions]="{standalone: true}">
+          <option>CFB</option>
+          <option>CFGO</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Semana:</label>
+        <input type="date"  class="form-control"  name="data"  [(ngModel)]="filtroCliente.semana" />
+      </div>
+    </div>
+<div class="col-md-2">
+      <div class="form-group">
+        <label>Situacao:</label>
+        <input type="text" class="form-control" name="situacao" [(ngModel)]="filtroCliente.situacaoPagamento" />
+      </div>
+    </div>
+    <div class="col-sm-1">
+        <button style="margin: 30px" class="btn btn-primary" (click)="pesquisaAvancada()" data-toggle="modal">
+          Pesquisar
+        </button>
+
+    </div>
+    <div class="col-sm-1">
+    <button style="margin: 30px " class="btn btn-success" (click)="limpar()" data-toggle="modal">
+      Limpar
+    </button>
+    </div>
+
+  </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12 ">
+            <table id="excel-table" class="table table-condensed table-hover light">
+                <thead>
+                    <tr>
+                        <th>SEMANA</th>
+                        <th>CLIENTES</th>
+                        <th>CIDADE</th>
+                        <th>CAPTANIA</th>
+                        <th>TP Proc.</th>
+                        <th>N. EMBARC.</th>
+                        <th>ORIGEM</th>
+                        <th>F. PGTO</th>
+                        <th>BANCO</th>
+                        <th>DT.RECEB</th>
+                        <th>CX REC.</th>
+                        <th>VR SERV.</th>
+                        <th>RECEBIDO</th>
+                        <th>Á RECEBER</th>
+                        <th>ST. PGT.</th>
+                        <th>GRU</th>
+                        <th>VR LIQ.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: 10, currentPage: p }">
+                      <td> {{ cliente.semana  | date : 'dd/MM/yyyy' : '+1' : 'pt'}}</td>
+                        <td>{{ cliente.nome }}</td>
+                        <td>{{ cliente.cidade }}</td>
+                        <td>{{ cliente.captania }}</td>
+                        <td>{{ cliente.tipoProcesso }}</td>
+                        <td>{{ cliente.numEmbarc }}</td>
+                        <td>{{ cliente.origem }}</td>
+                        <td>{{ cliente.formPgto }}</td>
+                        <td>{{ cliente.banco }}</td>
+                        <td>{{ cliente.dataReceb | date : 'dd/MM/yyyy' : '+1' : 'pt'}}</td>
+                        <td>{{ cliente.caixaRecebido | date : 'dd/MM/yyyy' : '+1' : 'pt'}}</td>
+                        <td>{{ cliente.valorServico | currency : 'R$'}}</td>
+                        <td>{{ cliente.recebibo | currency : 'R$'}}</td>
+                        <td>{{ cliente.areceber | currency : 'R$'}}</td>
+                        <td [ngClass]="{'pago': cliente.situacaoPagamento == 'PAGO', 'naopago': cliente.situacaoPagamento == 'EM ABERTO'}">{{ cliente.situacaoPagamento }}</td>
+                        <td>{{ cliente.gru | currency : 'R$'}}</td>
+                        <td>{{ cliente.valorLiquido | currency : 'R$'}}</td>
+                        <td class="doNotPrint">
+                          <div class="flex-container">
+                            <button class="btn btn-primary btn-sm"
+                                    routerLink="/clientes-form/{{ cliente.id }}">
+                              <i class="fa fa-edit "></i>
+                            </button>
+
+                            <button class="btn btn-danger btn-sm" (click)="preparaDelecao(cliente)"
+                                    data-toggle="modal" data-target="#modalDelecao">
+                              <i class="fa fa-trash"></i>
+                            </button>
+
+                            <a class="btn btn-success btn-sm"
+                               routerLink="/clientes-recibo/{{ cliente.id }}"  target="_blank"
+                            >
+                              <i class="fa fa-print"></i>
+                            </a>
+                          </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>TOTAL</th>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>{{total("valorServico")| currency : 'R$'}}</td>
+                        <td>{{total("recebibo")| currency : 'R$'}}</td>
+                        <td>{{total("areceber")| currency : 'R$'}}</td>
+                        <td>--</td>
+                        <td>{{total("gru")| currency : 'R$'}}</td>
+                        <td>{{total("valorLiquido")| currency : 'R$'}}</td>
+                      <td class="doNotPrint">
+                        <button  class="btn btn-sm btn-success" (click)="downloadXls()">
+                          <i class="fa fa-file-excel"></i>
+                      </button></td>
+                    </tr>
+                </tbody>
+            </table>
+          <div class="pagination">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+    </div>
+
+    <div id="modalDelecao" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Confirmação</h4>
+                </div>
+
+                <div class="modal-body" *ngIf="clienteSelecionado">
+                    Confirma a deleção do(a) Cliente {{ clienteSelecionado.nome }}?
+                </div>
+
+                <div class="modal-footer ">
+                    <button class="btn btn-success" (click)="deletarCliente()"
+                            data-dismiss="modal">Confirmar</button>
+                    <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+@media print{
+  .light{
+    -webkit-print-color-adjust:exact !important;
+    background: white  !important;
+    color: #000000;
+    font-weight: bold;
+    border: 2px solid black;
+  }
+  .doNotPrint
+  { display:none ;}
+
+}
+.flex-container {
+  flex-direction: row;
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+.fa {
+  font-size: 5px;
+}
+.btn-lateral{
+  padding: 10px;
+}
+
+.pagination {
+  padding: 20px 16px;
+  float: right;
+  font-size: 18px;
+}
+.pagination::ng-deep .ngx-pagination .current{
+  background-color: purple;
+}
+
+.pago {
+  background-color: #90ee90; /* Cor de fundo 1 */
+  /* Outros estilos de background, como imagem de fundo, tamanho, posição, etc. */
+}
+
+.naopago {
+  background-color: #fbaaa4; /* Cor de fundo 2 */
+
+}
+
+.btn-custom {
+    background-color: purple;
+    color: #fff; /* Define a cor do texto como branco ou outra cor legível */
+}
+

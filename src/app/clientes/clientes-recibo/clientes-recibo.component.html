@@ -1,0 +1,65 @@
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item active">{{ cliente.id ? '' : ''}}</li>
+</ol>
+<div class="container">
+  <img src="https://i.imgur.com/jFy7UPY.png">
+  <h1 class="mt-4" id="recibo">RECIBO </h1>
+  <br>
+  <h4>NETO DESPACHANTE NÁUTICO E ESCOLA NÁUTICA EIRELI-ME</h4>
+  <br>
+  <h6>Av. Angélica, QD Y01, LT 14, nº 508, Jardim Bela Vista, Goiânia-Go.
+    Telefones: (62)3282-3906/ 3249 3052
+  </h6>
+  <br>
+  <h6>WhatsApp: (62) 9 9971-9568 <i class="fa-brands fa-whatsapp"></i></h6>
+  <br>
+  <form #clienteForm="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-success" role="alert" *ngIf="success == true">
+          Cliente salvo/atualizado com sucesso!
+        </div>
+
+        <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+          {{erro}}
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-8">
+        <div class="form-group">
+          <label id="nomeCliente">CLIENTE: {{cliente.nome}} </label>
+          <br>
+          <label> DATA: {{cliente.dataReceb| date : 'dd/MM/yyyy'}}</label>
+          <br>
+          <h2>_________________________________________________________________________</h2>
+          <br>
+          <label id="descricao">DESCRIÇÃO</label>
+          <br>
+          <label id="valorRecebido">VALOR:{{cliente.recebibo | currency : 'R$'}}</label>
+
+          <h2>_________________________________________________________________________</h2>
+          <br>
+          <label id="corAzul1">SERVIÇO: PAGAMENTO REFERENTE Á:  <label id="corPreta1">{{cliente.tipoProcesso}}</label></label>
+          <br>
+          <br>
+<!--          <label id="corAzul">ORIGEM DO PROCESSO: <label id="corPreta">{{cliente.origem}}</label></label>-->
+          <br>
+          <br>
+          <label id="corAzul2">TIPO DE PAGAMENTO: <label id="corPreta2">{{cliente.formPgto}}</label></label>
+          <br>
+          <br>
+          <label id="contato">Contato Financeiro: 62 3282-3906 <br> Email: financeiro@escolanauticaeassessoria.com.br</label>
+        </div>
+        <br>
+<!--        <label id="pago">PAGO</label>-->
+      </div>
+
+
+    </div>
+
+  </form>
+</div>
