@@ -1,100 +1,86 @@
-.selectpicker{
-  border-radius: 5px;
-  background-color: white;
-  font-size: 20px;
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f8ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
 }
-.selectpicker-option{
-  background-color: DodgerBlue;
+.recibo {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+  max-width: 800px;
+  position: relative;
 }
-
-
-select-option{
-  background-color: #0b2e13;
+.logo {
+  max-width: 200px;
+  margin-bottom: 20px;
 }
-
 h1 {
-  color: darkblue;
+  color: #003366;
+  font-size: 36px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+h4 {
+  color: #003366;
+  font-size: 18px;
+  margin-top: 0;
+  text-align: center;
+}
+h6 {
+  color: #666;
+  font-size: 14px;
+  margin: 5px 0;
+  text-align: center;
+}
+.info-cliente {
+  margin-top: 30px;
+  border-top: 2px solid #003366;
+  border-bottom: 2px solid #003366;
+  padding: 20px 0;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #003366;
+  font-weight: 500;
+}
+.valor {
+  font-size: 24px;
+  color: #cc0000;
   font-weight: bold;
-  font-family: "Arial", Times, serif;
+  margin: 20px 0;
 }
-
-label{
-  font-weight: bold;
-  font-size: 32px;
-  font-family: "Arial", Times, serif;
+.detalhes {
+  margin-top: 20px;
 }
-
-h2{
-  color: red;
-  font-family: "Arial", Times, serif;
+.detalhes label {
+  margin-top: 10px;
 }
-
-#descricao{
-  color: darkblue;
-  font-size: 28px;
-  text-decoration: underline;
-  font-family: "Arial", Times, serif;
+.observacao {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f0f8ff;
+  border-radius: 5px;
 }
-
-#valorRecebido{
-  margin-left: 900px;
-  font-size: 28px;
-  font-family: "Arial", Times, serif;
+.contato {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
 }
-
-#corAzul1{
-  color: darkblue;
-  font-family: "Arial", Times, serif;
+.watermark {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 48px;
+  color: rgba(0, 51, 102, 0.1);
+  transform: rotate(-45deg);
 }
-
-#corPreta1{
-  color: black;
-  font-family: "Arial", Times, serif;
-}
-
-#corAzul{
-  color: darkblue;
-  font-family: "Arial", Times, serif;
-}
-
-#corPreta{
-  color: black;
-  font-family: "Arial", Times, serif;
-}
-
-#corAzul2{
-  color: darkblue;
-  font-family: "Arial", Times, serif;
-}
-
-#corPreta2{
-  color: black;
-  font-family: "Arial", Times, serif;
-}
-
-#pago{
-  color: darkblue;
-  font-size: 46px;
-  margin-left: 900px;
-  text-decoration: underline;
-  font-family: "Arial", Times, serif;
-}
-
-#nomeCliente{
-  font-size: 32px;
-  font-family: "Arial", Times, serif;
-}
-
-#recibo{
-  font-size: 52px;
-  font-family: "Arial", Times, serif;
-}
-
-#impressao{
-  opacity: 0.0;
-}
-
-#contato{
-  color:red;
-}
-
