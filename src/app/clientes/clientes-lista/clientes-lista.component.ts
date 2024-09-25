@@ -6,6 +6,8 @@ import { Cliente } from '../cliente';
 import { CidadeService } from '../../cidade.service'
 import { ClientesService } from '../../clientes.service';
 import { FormControl } from '@angular/forms';
+import { OrigemService } from '../../origens.service'
+import { Origem } from '../origens';
 
 
 
@@ -33,35 +35,46 @@ export class ClientesListaComponent implements OnInit {
   totalValorAreceber: any;
   totalValorLiquido: any;
   totalGru: any;
+  origens: Origem[] = [];
 
   public exportarPlanilha(): any[] {
-    this.totalValorServico = this.clientes.reduce((acc, cliente) => acc + (+cliente.valorServico || 0), 0)
-    this.totalValorRecebido = this.clientes.reduce((acc, cliente) => acc + (+cliente.recebibo || 0), 0)
-    this.totalValorAreceber = this.clientes.reduce((acc, cliente) => acc + (+cliente.areceber || 0), 0)
-    this.totalValorLiquido = this.clientes.reduce((acc, cliente) => acc + (+cliente.valorLiquido || 0), 0)
-    this.totalGru = this.clientes.reduce((acc, cliente) => acc + (+cliente.gru || 0), 0)
+    // Cálculo dos totais
+    this.totalValorServico = this.clientes.reduce((acc, cliente) => acc + (+cliente.valorServico || 0), 0);
+    this.totalValorRecebido = this.clientes.reduce((acc, cliente) => acc + (+cliente.recebibo || 0), 0);
+    this.totalValorAreceber = this.clientes.reduce((acc, cliente) => acc + (+cliente.areceber || 0), 0);
+    this.totalValorLiquido = this.clientes.reduce((acc, cliente) => acc + (+cliente.valorLiquido || 0), 0);
+    this.totalGru = this.clientes.reduce((acc, cliente) => acc + (+cliente.gru || 0), 0);
 
+    // Ordenar os clientes por nome em ordem alfabética, removendo espaços antes e depois do nome
+    const sortedClientes = [...this.clientes].sort((a, b) => {
+        const nomeA = a.nome?.trim().toLowerCase() || ''; // Remover espaços antes e depois
+        const nomeB = b.nome?.trim().toLowerCase() || ''; // Remover espaços antes e depois
+        return nomeA.localeCompare(nomeB);
+    });
 
-    return this.clientes.map(object => ({
-      Semana: object.semana ? format(add(parseISO(object.semana), { days: 1 }), 'dd/MM/yyyy') : '-',
-      Cliente: object.nome || '-',
-      Cidade: object.cidade || '-',
-      Capitania: object.captania,
-      TipoProc: object.tipoProcesso || '-',
-      NomeEMBARC: object.numEmbarc || '-',
-      Origem: object.origem || '-',
-      FormaPGTO: object?.formPgto || '-',
-      Banco: object?.banco || '-',
-      DataRecebimento: object?.dataReceb ? format(add(parseISO(object.dataReceb), { days: 1 }), 'dd/MM/yyyy') : '-',
-      CaixaRecebido: object?.caixaRecebido ? format(add(parseISO(object.caixaRecebido), { days: 1 }), 'dd/MM/yyyy') : '-',
-      ValorServico: object?.valorServico ? this.formatMoney(Number(object.valorServico)) : '-',
-      Recebido: object?.recebibo ? this.formatMoney(Number(object.recebibo)) : '-',
-      AReceber: object?.areceber ? this.formatMoney(Number(object.areceber)) : '-',
-      SituacaoPagamento: object?.situacaoPagamento || '-',
-      GRU: object?.gru ? this.formatMoney(Number(object.gru)) : '-',
-      ValorLiquido: object?.valorLiquido ? this.formatMoney(Number(object.valorLiquido)) : '-',
+    // Retornar os dados formatados
+    return sortedClientes.map(object => ({
+        Semana: object.semana ? format(add(parseISO(object.semana), { days: 1 }), 'dd/MM/yyyy') : '-',
+        Cliente: object.nome?.trim() || '-', // Remover espaços antes e depois ao exibir o nome
+        Cidade: object.cidade || '-',
+        Capitania: object.captania,
+        TipoProc: object.tipoProcesso || '-',
+        NomeEMBARC: object.numEmbarc || '-',
+        Origem: object.origem || '-',
+        FormaPGTO: object?.formPgto || '-',
+        Banco: object?.banco || '-',
+        DataRecebimento: object?.dataReceb ? format(add(parseISO(object.dataReceb), { days: 1 }), 'dd/MM/yyyy') : '-',
+        CaixaRecebido: object?.caixaRecebido ? format(add(parseISO(object.caixaRecebido), { days: 1 }), 'dd/MM/yyyy') : '-',
+        ValorServico: object?.valorServico ? this.formatMoney(Number(object.valorServico)) : '-',
+        Recebido: object?.recebibo ? this.formatMoney(Number(object.recebibo)) : '-',
+        AReceber: object?.areceber ? this.formatMoney(Number(object.areceber)) : '-',
+        SituacaoPagamento: object?.situacaoPagamento || '-',
+        GRU: object?.gru ? this.formatMoney(Number(object.gru)) : '-',
+        ValorLiquido: object?.valorLiquido ? this.formatMoney(Number(object.valorLiquido)) : '-',
     }));
-  }
+}
+
+
 
 
 
@@ -83,53 +96,90 @@ export class ClientesListaComponent implements OnInit {
 
 
 
+  carregarOrigems() {
+    this.origemService.getOrigems().subscribe((origens) => {
+      this.origens = origens;
+    });
+  }
+
+
+
   downloadXls() {
-    const workSheet = XLSX.utils.json_to_sheet(this.exportarPlanilha()); // chamar a função exportarPlanilha
+    const workSheet = XLSX.utils.json_to_sheet(this.exportarPlanilha()); // Chamar a função exportarPlanilha
 
     // Adicione uma nova linha com os totais
     const totalValues = {
-      totalValorServico: this.formatMoney(this.totalValorServico),
-      totalValorRecebido: this.formatMoney(this.totalValorRecebido),
-      totalValorAreceber: this.formatMoney(this.totalValorAreceber),
-      totalGru: this.formatMoney(this.totalGru),
-      totalValorLiquido: this.formatMoney(this.totalValorLiquido)
-      
+        totalValorServico: this.formatMoney(this.totalValorServico),
+        totalValorRecebido: this.formatMoney(this.totalValorRecebido),
+        totalValorAreceber: this.formatMoney(this.totalValorAreceber),
+        totalGru: this.formatMoney(this.totalGru),
+        totalValorLiquido: this.formatMoney(this.totalValorLiquido)
     };
-
-    // Converta a nova linha em uma matriz de valores
-    const totalRowValues: unknown[] = Object.values(totalValues);
 
     const workBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workBook, workSheet, "dados");
 
-    // Adicione uma linha vazia antes dos totais
-    XLSX.utils.sheet_add_aoa(workSheet, [[]], { origin: -1 });
+    // Define a origem para os títulos e valores de totais
+    const originColumn = 12; // Coluna específica, por exemplo, a 12ª coluna
+    const range = XLSX.utils.decode_range(workSheet['!ref']); // Obtém o intervalo de células
 
-    // Adicione a nova linha como a última linha no objeto worksheet
-    XLSX.utils.sheet_add_aoa(workSheet, [[...Object.keys(totalValues)]], { origin: -1 });
-    XLSX.utils.sheet_add_aoa(workSheet, [totalRowValues], { origin: -1 });
+    // Adicionar os títulos na linha correspondente
+    const headerTitles = Object.keys(totalValues);
+    const headerRowRef = XLSX.utils.encode_cell({ c: originColumn, r: range.e.r + 2 }); // Linha onde você quer que os títulos apareçam
+    XLSX.utils.sheet_add_aoa(workSheet, [headerTitles], { origin: headerRowRef });
+
+    // Formatar os títulos em negrito
+    headerTitles.forEach((title, index) => {
+        const cellAddress = XLSX.utils.encode_cell({ c: originColumn + index, r: range.e.r + 2 });
+        if (!workSheet[cellAddress]) workSheet[cellAddress] = { v: title }; // Garante que a célula tenha valor e exista
+        workSheet[cellAddress].s = {
+            font: {
+                bold: true // Define a fonte em negrito
+            }
+        };
+    });
+
+    // Adicionar os valores totais logo abaixo dos títulos
+    const totalRowRef = XLSX.utils.encode_cell({ c: originColumn, r: range.e.r + 3 }); // Linha para os totais, logo abaixo dos títulos
+    XLSX.utils.sheet_add_aoa(workSheet, [Object.values(totalValues)], { origin: totalRowRef });
+
+    // Definir estilos (negrito) para os totais
+    Object.values(totalValues).forEach((_, index) => {
+        const totalCellAddress = XLSX.utils.encode_cell({ c: originColumn + index, r: range.e.r + 3 });
+        if (!workSheet[totalCellAddress]) workSheet[totalCellAddress] = {}; // Garante que a célula exista
+        workSheet[totalCellAddress].s = {
+            font: {
+                bold: true // Negrito também nos totais (opcional)
+            }
+        };
+    });
 
     //buffer
     let buffer = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" });
     //binary string
     XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
-    //Donwload
+    //Download
     XLSX.writeFile(workBook, `Clientes.xlsx`);
-  }
+}
 
 
 
 
 
 
-  constructor(private service: ClientesService, private router: Router, private cidadesService: CidadeService) {}
+
+
+
+
+  constructor(private service: ClientesService, private router: Router, private cidadesService: CidadeService, private origemService: OrigemService,) {}
 
   ngOnInit(): void {
     this.filtroCliente = new Cliente();
     this.service
       .getClientes()
       .subscribe((resposta) => (this.clientes = resposta));
-      // this.carregarCidades(); 
+      this.carregarOrigems();
+      // this.carregarCidades();
   }
 
   // carregarCidades() {
@@ -157,7 +207,7 @@ export class ClientesListaComponent implements OnInit {
     window.print();
   }
 
-  
+
 
 
 

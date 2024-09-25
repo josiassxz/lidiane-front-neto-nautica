@@ -30,7 +30,7 @@ export class ClientesFormComponent implements OnInit {
   tipoPprocesso: TipoProcesso[] = [];
   origens: Origem[] = [];
   clienteNome: Cliente[]= [];
-  
+
 
 
 
@@ -56,7 +56,7 @@ export class ClientesFormComponent implements OnInit {
         }
     });
     this.carregarCidades();
-    this.carregarOrigems(); 
+    this.carregarOrigems();
     this.carregarTipoProcesso();
   }
 
@@ -65,6 +65,9 @@ export class ClientesFormComponent implements OnInit {
       this.tipoPprocesso = tipoProcesso;
     });
   }
+
+  // Assuming this is in your component class
+
 
   carregarCidades() {
     this.cidadesService.getCidades().subscribe((cidades) => {

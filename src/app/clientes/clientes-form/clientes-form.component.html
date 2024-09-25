@@ -1,4 +1,4 @@
-<h1 class="mt-4">Clientes</h1>
+﻿<h1 class="mt-4">Clientes</h1>
 <ol class="breadcrumb mb-4">
   <li class="breadcrumb-item active">{{ cliente.id ? 'Edição' : 'Cadastro'}}</li>
 </ol>
@@ -35,11 +35,11 @@
       <div class="col-md-3">
         <div class="form-group">
           <label>Nome Cliente: *</label>
-          <!-- <input type="text" class="form-control" [(ngModel)]="cliente.nome" name="nome"/> -->
-          <input type="text" class="form-control"  [(ngModel)]="cliente.nome" name="nome" (input)="buscarPorNome($event.target.value)" placeholder="Digite o nome do cliente">
-          <ul>
-            <li *ngFor="let cliente of clientes">{{cliente.nome}}</li>
-          </ul>
+           <input type="text" class="form-control" [(ngModel)]="cliente.nome" name="nome"/>
+<!--          <input type="text" class="form-control"  [(ngModel)]="cliente.nome" name="nome" (input)="buscarPorNome($event.target.value)" placeholder="Digite o nome do cliente">-->
+<!--          <ul>-->
+<!--            <li *ngFor="let cliente of clientes">{{cliente.nome}}</li>-->
+<!--          </ul>-->
 
         </div>
       </div>
@@ -49,6 +49,7 @@
           <select class="form-control" [(ngModel)]="cliente.captania" [ngModelOptions]="{standalone: true}">
             <option>CFB</option>
             <option>CFGO</option>
+            <option>CAPITANIA-ITINERANTE</option>
           </select>
         </div>
       </div>
@@ -62,7 +63,9 @@
           </select>
         </div>
       </div>
-      
+
+
+
 
       <div class="col-md-2">
         <div class="form-group">
@@ -73,9 +76,9 @@
           </select>
         </div>
       </div>
-      
-      
-      
+
+
+
 
 
       <div class="col-md-3">
@@ -89,7 +92,7 @@
         <div class="form-group">
           <label>Origem: *</label>
           <select class="form-control" [(ngModel)]="cliente.origem" [ngModelOptions]="{ standalone: true}">
-            <option value="">Selecione um Tipo de Processo</option>
+            <option value="">Selecione uma Origem</option>
             <option *ngFor="let origem of origens" [value]="origem.origem">{{ origem.origem }}</option>
           </select>
         </div>
@@ -115,7 +118,7 @@
             <option>X</option>
             <option>PIX</option>
             <option>BOLETO</option>
-            <option>CORTERSIA</option>
+            <option>CORTESIA</option>
             <option>DINHEIRO/PIX</option>
 	    <option>CARTAO CREDITO</option>
             <option>OUTROS</option>

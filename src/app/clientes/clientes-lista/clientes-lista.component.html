@@ -38,52 +38,24 @@
         </button>
     </div>
   </div>
-  
-  
-  
+
   <br>
-
-
   <div class="flex-container">
     <div class="col-md-4">
       <label>Nome Cliente:</label>
       <input type="text" class="form-control"  [(ngModel)]="filtroCliente.nome"/>
     </div>
-       <div class="col-md-2">
-         <div class="form-group">
-           <label>Origem:</label>
-           <select class="form-control" [(ngModel)]="filtroCliente.origem" [ngModelOptions]="{standalone: true}">
-             <option>AGM</option>
-             <option>APN</option>
-             <option>B.FISHER</option>
-             <option>B.PARANA</option>
-             <option>C.PRESIDENTE</option>
-             <option>C.RONDON</option>
-             <option>C.PESCADOR</option>
-             <option>DANILO</option>
-             <option>DIAS NAUTICA</option>
-             <option>ENILDON</option>
-             <option>JOAO CATALÃO</option>
-             <option>MAIS VEICULOS</option>
-             <option>MARCA NAUTICA</option>
-             <option>MARINA DOS AMIGOS</option>
-             <option>ORCA</option>
-             <option>ORIGEM</option>
-             <option>PART.</option>
-             <option>PIER BOATS</option>
-             <option>PIER NAUTICA</option>
-             <option>RADIAL AUTOMOVEIS</option>
-             <option>SAGA APS</option>
-             <option>SAIMONT</option>
-             <option>SÓ PESCA</option>
-             <option>STATUS NAUTICA</option>
-             <option>TSA</option>
-             <option>VNB</option>
-             <option>VNG</option>
-             <option>X</option>
-           </select>
-         </div>
-       </div>
+
+
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Origem:</label>
+        <select class="form-control" [(ngModel)]="filtroCliente.origem" [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let origem of origens" [value]="origem.origem">{{ origem.origem }}</option>
+        </select>
+      </div>
+    </div>
+    
     <div class="col-md-2">
       <div class="form-group">
         <label>Data Recebimento Inicial:</label>
@@ -109,6 +81,7 @@
         <select class="form-control" [(ngModel)]="filtroCliente.captania" [ngModelOptions]="{standalone: true}">
           <option>CFB</option>
           <option>CFGO</option>
+          <option>CAPITANIA-ITINERANTE</option>
         </select>
       </div>
     </div>
