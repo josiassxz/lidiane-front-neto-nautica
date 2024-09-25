@@ -4,44 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recibo Náutico</title>
-
 </head>
 <body>
     <div class="recibo">
-        <img src="https://i.imgur.com/jFy7UPY.png" alt="Logo" class="logo">
-        <h1>RECIBO</h1>
-        <h4>NETO DESPACHANTE NÁUTICO E ESCOLA NÁUTICA EIRELI-ME</h4>
-        <h6>Av. Angélica, QD Y01, LT 14, nº 508, Jardim Bela Vista, Goiânia-Go.</h6>
-        <h6>Telefones: (62)3282-3906/ 3249 3052</h6>
-        <h6>WhatsApp: (62) 9 9971-9568 <i class="fa-brands fa-whatsapp"></i></h6>
-
-        <div class="info-cliente">
-            <label id="nomeCliente">CLIENTE: {{cliente.nome}}</label>
-            <label>DATA: {{cliente.dataReceb| date : 'dd/MM/yyyy'}}</label>
+        <div class="header">
+            <img src="https://i.imgur.com/jFy7UPY.png" alt="Logo" class="logo">
+            <div class="company-info">
+                <p>NETO DESPACHANTE NÁUTICO E ESCOLA NÁUTICA EIRELI-ME</p>
+                <p>Av. Angélica, QD Y01, LT 14, nº 508, Jardim Bela Vista, Goiânia-Go.</p>
+                <p>Tel. (62)3282-3906/ 3249 3052</p>
+                <p>WhatsApp Financeiro : (62) 9 99513-0537</p>
+            </div>
         </div>
 
-        <div class="valor">
-            <label id="valorRecebido">VALOR: {{cliente.recebibo | currency : 'R$'}}</label>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="received-from">Recebido De</label>
+                <input type="text" id="received-from" value="{{cliente.nome}}">
+            </div>
+            <div class="form-group">
+                <label for="date">Data</label>
+                <input type="text" id="date" value="{{ cliente.dataReceb | date : 'dd/MM/yyyy' : '+1' : 'pt'}}">
+            </div>
         </div>
 
-        <div class="detalhes">
-            <label id="corAzul1">SERVIÇO: PAGAMENTO REFERENTE Á: <span id="corPreta1">{{cliente.tipoProcesso}}</span></label>
-            <label id="corAzul2">TIPO DE PAGAMENTO: <span id="corPreta2">{{cliente.formPgto}}</span></label>
+        <div class="form-group">
+            <label for="amount">Valor em Reais</label>
+            <input type="text" id="amount" class="valor" value="{{cliente.recebibo | currency : 'R$'}}">
+        </div>
+
+        <div class="form-group">
+            <label for="for">Referente a</label>
+            <input type="text" id="for" value="{{cliente.tipoProcesso}}">
+        </div>
+
+        <div class="form-group">
+            <label for="received-by">Recebido por</label>
+            <input type="text" id="received-by">
+        </div>
+
+        <div class="payment-method">
+            <div>
+                <label>Forma de Pagamento:</label>
+                <div class="payment-option">
+                  <label id="form-payment">{{cliente.formPgto}}</label>
+                </div>
+            </div>
+            <div class="form-group" style="max-width: 200px;">
+                <label for="signature">Assinatura</label>
+                <div class="signature-box"></div>
+            </div>
         </div>
 
         <div class="observacao">
-            <label id="corVermelha1">OBSERVAÇÃO: <span id="corPreta2">{{cliente.observacao}}</span></label>
+            <label>Observação:</label>
+            <p>{{cliente.observacao}}</p>
         </div>
 
-        <div class="contato">
-            <label id="contato">Contato Financeiro: 62 3282-3906 <br> Email: financeiro@escolanauticaeassessoria.com.br</label>
+        <div style="margin-top: 20px; font-size: 12px; color: #666; text-align: center;">
+            <p>Contato Escritorio: 62 3282-3906 | Email: financeiro@escolanauticaeassessoria.com.br</p>
         </div>
-        
-        <div class="detalhes">
-          <label id="corAzul1">SERVIÇO: PAGAMENTO REFERENTE Á: <span id="corPreta1">{{cliente.tipoProcesso}}</span></label>
-          <label id="corAzul2">SITUACAO: <span id="corPreta2">{{cliente.situacao_pagamento}}</span></label>
-      </div>
 
-        <!-- <div class="watermark">PAGO</div> -->
+
+        <div 
+        class="watermark" 
+        [ngClass]="{'pago': cliente.situacaoPagamento === 'PAGO', 'em-aberto': cliente.situacaoPagamento !== 'PAGO'}">
+        {{ cliente.situacaoPagamento === 'PAGO' ? 'PAGO' : 'EM ABERTO' }}
+        </div>
+
+
+
+
     </div>
 </body>
+</html>
