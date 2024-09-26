@@ -8,6 +8,8 @@ import { ClientesService } from '../../clientes.service';
 import { FormControl } from '@angular/forms';
 import { OrigemService } from '../../origens.service'
 import { Origem } from '../origens';
+import html2pdf from 'html2pdf.js';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -171,7 +173,7 @@ export class ClientesListaComponent implements OnInit {
 
 
 
-  constructor(private service: ClientesService, private router: Router, private cidadesService: CidadeService, private origemService: OrigemService,) {}
+  constructor(private service: ClientesService, private router: Router, private cidadesService: CidadeService, private origemService: OrigemService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.filtroCliente = new Cliente();
@@ -206,6 +208,7 @@ export class ClientesListaComponent implements OnInit {
   imprimir() {
     window.print();
   }
+  
 
 
 
@@ -270,9 +273,40 @@ export class ClientesListaComponent implements OnInit {
   }
 
 
+  downloadPDF(clienteId: number) {
+    // Navegar para a página do recibo
+    this.router.navigate(['/clientes-recibo', clienteId]).then(() => {
+      // Esperar um pouco para garantir que a página seja renderizada
+      setTimeout(() => {
+        // Capturar o conteúdo da página
+        const element = document.body;
+        const opt = {
+          margin: [6,6,7,7],
+          filename: `recibo-cliente-${clienteId}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
 
-
-
-
-
+        // Gerar e baixar o PDF
+        html2pdf().from(element).set(opt).save().then(() => {
+          // Voltar para a página anterior após o download
+          this.router.navigate(['../clientes-lista']);
+          setTimeout(function() {
+            location.reload();
+          }, 2000);
+          
+        });
+      }, 1000); // Ajuste este tempo conforme necessário
+    });
+  }
 }
+
+  
+
+
+
+
+
+
+

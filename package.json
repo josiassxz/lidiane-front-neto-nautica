@@ -29,6 +29,7 @@
     "currency-formatter": "^1.5.9",
     "date-fns": "^2.29.3",
     "file-saver": "^2.0.5",
+    "html2pdf.js": "^0.10.2",
     "jquery": "^3.5.0",
     "ngx-filesaver": "^13.0.0",
     "ngx-mask": "^14.0.2",
