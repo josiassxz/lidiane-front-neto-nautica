@@ -51,6 +51,9 @@ export class ClientesService {
     if (isNotNullOrUndefined(filtro.semana)){
       params = params.append('semana', filtro.semana);
     }
+    if (isNotNullOrUndefined(filtro.semanaFinal)){
+      params = params.append('semanaFinal', filtro.semanaFinal);
+    }
 
     return this.http.get<any>(
       'http://localhost:8080/api/clientes/pesquisar',

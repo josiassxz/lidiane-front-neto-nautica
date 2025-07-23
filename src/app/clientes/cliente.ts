@@ -7,6 +7,7 @@ export class Cliente{
     dataCadastro: string;
     tipoProcesso: string;
     semana: string;
+    semanaFinal: string;
     numEmbarc: string;
     banco: string;
     origem: string;
